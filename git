@@ -1,0 +1,166 @@
+#include<bits/stdc++.h>
+using namespace std;
+struct SinhVien{
+ int maSv;
+ char hoDem[25];
+ char ten[9];
+ char gioiTinh[5];
+ int namSinh;
+ double diemTk;
+};
+struct Node{
+  SinhVien infor;
+  Node *next;
+};
+typedef Node *TRO;
+int sizeOfList(TRO L){
+	TRO Q = L;
+	int dem=1;
+    while (Q->next != NULL) {
+            Q = Q->next;
+            dem++;
+    }
+    return dem;
+}
+SinhVien nhapSV(){
+	SinhVien a;
+	cout<<"nhap ma sinh vien";
+	cin>>a.maSv;
+	cout<<"nhap ho dem";
+	fflush(stdin); 
+	gets(a.hoDem);
+	cout<<"nhap ten";
+	fflush(stdin); 
+	gets(a.ten);
+	cout<<"nhap gioi tinh";
+	fflush(stdin); 
+	gets(a.gioiTinh);
+	cout<<"nhap nam sinh";
+	cin>>a.namSinh;
+	cout<<"nhap diem tk";
+	cin>>a.diemTk;
+	return a;
+}
+bool isempty(TRO L) {
+    return L == NULL;
+}
+void add(TRO& L) {
+    TRO P, Q;
+    P = new Node;
+    P->infor = nhapSV();
+    P->next = NULL;
+    if (isempty(L)) {
+        L = P;
+    }
+    else {
+        Q = L;
+        while (Q->next != NULL) {
+            Q = Q->next;
+        }
+        Q->next = P;
+    }
+}
+void nhap(TRO &L){
+	int n;
+	cout<<"nhap so sinh vien can nhap";
+	cin>>n;
+	for(int i=0; i<n;i++){
+		add(L);
+	}
+}
+void xuat(TRO &a){
+	cout<<a->infor.maSv<<setw(20)<<a->infor.hoDem<<setw(20)<<a->infor.ten<<endl;
+}
+void xuat2(TRO &L){
+	TRO Q=L;
+	while(Q!=NULL){
+		xuat(Q);
+		Q=Q->next;
+	}
+}
+void chen(TRO &L){
+	int n;
+	cout<<"nhap vi tri can chen";
+	cin>>n;
+	if(n<0||n>sizeOfList(L)+1){
+		cout<<"Khong the chen vi nhap sai";
+		return;
+	}
+	TRO Q, P;
+    P = new Node;
+    cout<<"Nhap sinh vien can chen";
+    if (!isempty(L)) {
+    	P->infor = nhapSV();
+        P->next = NULL;
+        Q = L;
+        while (Q != NULL) {
+            if (n == 1) {
+                P->next = L;
+                L = P;
+                break;
+            }
+            else if (n > 1) {
+                n--;
+                if (n == 1) {
+                    P->next = Q->next;
+                    Q->next = P;
+                    break;
+                }
+            }	
+            Q = Q->next;
+        }
+    }
+}
+void xoa(TRO &L){
+	int n;
+	TRO Q=L;
+	TRO P=L;
+	int k=sizeOfList(L);
+	cout<<"nhap vi tri can xoa";
+	cin>>n;
+	if(n<0||n>sizeOfList(L)+1){
+		cout<<"Khong the xoa vi nhap sai";
+		return;
+	}
+	if(n==1){
+		L=Q->next;
+		delete Q;
+		return;
+	}
+	for(int i=1; i<n-1;i++){
+		Q=Q->next;
+	}
+	TRO K=Q->next;
+	for(int i=1; i<n+1;i++){
+		P=P->next;
+	}
+	Q->next=P;
+	delete K;
+}
+void sapXep(TRO &L){
+	TRO P,Q,R;
+	P=L;
+	while(P->next!=NULL){
+		R=P;
+		Q=P->next;
+		while(Q!=NULL){
+			if(Q->infor.diemTk>R->infor.diemTk){
+				R=Q;
+			}
+			Q=Q->next;
+		}
+		SinhVien tg=P->infor;
+		P->infor=R->infor;
+		R->infor=tg;
+		P=P->next;
+	}
+	xuat2(L);
+}
+int main(){
+	TRO L=NULL;
+	nhap(L);
+//	xuat2(L);
+	//xoa(L);
+	//xuat2(L);
+	sapXep(L);
+}
