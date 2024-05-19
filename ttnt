@@ -1,0 +1,88 @@
+class Node:
+def __init__(self, name, par=None):
+self.name-name
+self.par-par
+def display(self):
+print(self.name)
+from collections import defaultdict
+data defaultdict(list)
+data['A']=['B', 'C', 'D']
+data['B']=['E', 'F']
+data['C']=['G', 'H']
+data['D']=['I','J']
+data['F']=['K', 'L', 'M']
+data['H']=['N','0']
+
+
+def equal(0,G):
+return 0.name==G.name
+def checkInArray (temp, Open):
+for x in Open:
+if equal(x, temp):
+return True
+return False
+def path(0):
+print(0.name)
+if 0. par! None:
+path(0.par)
+else:
+return
+
+
+
+def BFS(S Node('A'), G Node('M')) :
+Open=[]
+Closed=[]
+Open.append(S)
+while True:
+if len(Open)==0 :
+print('Tim kiem khong thanh cong')
+return
+0=Open.pop(0)
+Closed.append(0)
+if equal(0,G)==True:
+print('Tim kiem thanh cong')
+path (0)
+return
+for x in data [0.name]:
+tmp Node(x)
+tmp.par=0
+# Neu temp khong thuoc open va close thi dua vao cuoi open
+ok1=checkInArray (tmp, Open)
+ok2=checkInArray (tmp, Closed)
+if not ok1 and not ok2:
+Open.append(tmp)
+
+
+
+
+def DFS(S Node('A')
+G = Node('M')) :
+Open=[]
+Closed=[]
+Open.append(S)
+while True:
+if len(Open)==0 :
+print('Tim kiem khong thanh cong')
+return
+0=0pen.pop(0)
+Closed.append(0)
+if equal(0,6)==True:
+print('Tim kiem thanh cong')
+path(0)
+return
+pos=0
+for x in data [0.name]:
+tmp Node (x)
+tmp.par=0
+# Neu temp khong thuoc open va close thi dua vao cuoi open
+ok1=checkInArray (tmp, Open)
+ok2=checkInArray (tmp, Closed)
+if not ok1 and not ok2:
+Open.insert(pos,tmp)
+pos=pos+1;
+
+
+
+DFS (Node('A'), Node ('F'))
+BFS (Node('A'), Node('F'))
