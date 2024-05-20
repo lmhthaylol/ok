@@ -1,0 +1,80 @@
+from collections import defaultdict
+
+class Node:
+    def __init__(self,name,par=None):
+        self.name=name
+        self.par=par
+    def display(self):
+        print(self.name,self.par)
+data=defaultdict(list)
+
+data['A']=['B','C','D']
+data['B']=['E','F']
+data['C']=['G','H']
+data['D']=['I','J']
+data['F']=['K','M','L']
+data['H']=['N','O']
+
+def equal(O,G):
+    return O.name==G.name
+def path(O):
+    if O is None:
+        return
+    print(O.name)
+    if(O.par!=None):
+        path(O.par)
+def checkInArray(tmp,Open):
+    for x in Open:
+        if equal(tmp,x):
+            return True
+    return False
+
+def BFS(S,G):
+    Open=[]
+    Close=[]
+    Open.append(S)
+    while True:
+        if len(Open)==0:
+            print("tìm kiếm thất bại")
+            return
+        O=Open.pop(0)
+        Close.append(O)
+        print(O.name)
+        if equal(O,G):
+            print("tìm kiếm thành công")
+            path(O)
+            return
+        for x in data[O.name]:
+            tmp=Node(x)
+            tmp.par=O
+            ok1=checkInArray(tmp,Open)
+            ok2=checkInArray(tmp,Close)
+            if not ok1 and not ok2:
+                Open.append(tmp)
+
+def DFS(S,G):
+    Open = []
+    Close = []
+    Open.append(S)
+    while True:
+        if len(Open) == 0:
+            print("tìm kiếm thất bại")
+            return
+        O = Open.pop(0)
+        Close.append(O)
+        print(O.name,sep='-',end=' ')
+        if equal(O, G):
+            print("\ntìm kiếm thành công")
+            path(O)
+            return
+        i=0
+        for x in data[O.name]:
+            tmp = Node(x)
+            tmp.par = O
+            ok1 = checkInArray(tmp, Open)
+            ok2 = checkInArray(tmp, Close)
+            if not ok1 and not ok2:
+                Open.insert(i,tmp)
+                i+=1
+# BFS(Node('A'),Node('J'))
+DFS(Node('A'),Node('N'))
