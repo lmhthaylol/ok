@@ -1,0 +1,209 @@
+BÀI 6.1. Simple chart
+import matplotlib.pyplot as mp
+import numpy as np
+#Tạo hai mảng x và y chứa tọa độ trên trục Ox và trục Oy của 10 điểm, vẽ biểu đồ trên 10 điểm này.plt
+
+x = np.array([1, 1.5, 2, 2.5, 3, 3.5, 4, 4.5, 5, 5.5])
+y = np.array([20, 30, 10, 40, 20, 30, 20, 10, 40, 50])
+
+mp.subplot(1,2,1)
+mp.plot(x, y)
+#Vẽ đồ thị hàm số y = 3x3 – 3x2 + 3x -3 trên đoạn [-10, 10]
+x = np.linspace(-10, 10, 100)
+y = 3*x*x*x - 3*x*x + 3*x - 3
+mp.subplot(1,2,2)
+mp.plot(x, y)
+mp.show()	
+BÀI 6.2. Chart decor
+import matplotlib.pyplot as mp
+import numpy as np
+mp.figure(facecolor='gray')
+mp.gcf().canvas.set_window_title('BÀI THỰC HÀNH SỐ 6')
+
+
+x = np.linspace(-10,10, 100)
+y = np.sin(x)
+font = {'family':'consolas','color':'blue','size':14}
+mp.title("ĐỒ THỊ Y = SIN(X)")
+mp.xlabel("Trục X", loc='right', fontdict=font)
+mp.ylabel("Trục Y", loc='top', fontdict=font)
+mp.plot(x, y, marker='*', ms=10, mec='r', mfc='y')
+mp.savefig('D:/FIG.png')
+mp.show()
+
+
+
+#nump
+Nhập vào một mảng Numpy a(n) gồm các phần tử thực từ bàn phím và:
+Chuyển a thành ma trận, in kết quả ra màn hình. HÀM
+Tách cột thứ nhất và cột thứ 2 (nếu có) của a để tạo thành hai mảng một chiều b và c. In b, c ra màn hình.
+Nối b với c để thu được mảng d, in d ra màn hình.
+Cho biết vị trí của các phần tử lớn hơn 1 trong mảng d.
+Sắp mảng d tăng dần bằng giải thuật ‘heapsort’ và in mảng được sắp ra màn hình.
+Nhập vào từ bàn phím một giá trị thực k. Cho biết vị trí để chèn k vào mảng d mà không phá vỡ tính được sắp của mảng d. Chèn k vào d và in kết quả ra màn hình.
+
+import numpy as np
+
+
+#1 HÀM NHẬP MẢNG
+def vecinput(n, name):
+    print("Nhập mảng ", name)
+    a = np.random.rand(n)
+    for i in range(n):
+        a[i] = float(input(name + "[{}] = ".format(i)))
+    return a
+
+
+#2 HÀM RESHAPE TỪ 1D SANG 2D
+def to2D(a, n):
+    try:
+        t = int(input('Nhập số dòng của ma trận: '))
+        if n % t != 0: raise ValueError 
+        k = a.reshape(t, n//t)
+        return k
+    except:
+        print(ValueError, ': Không thể reshape !')
+	return
+
+n = int(input("n="))
+a = vecinput(n, 'a')
+a = to2D(a, n)
+
+#3 
+if a != ‘None’:
+print('Mảng a:\n', a)
+
+if len(a[0]) > 1:  #Nếu có từ 2 cột trở lên
+    b = a[:, 0]
+    c = a[:, 1]
+    b = np.reshape(b, -1)
+    c = np.reshape(c, -1)
+
+    print('Cột thứ nhất b: ', b)
+    print('Cột thứ hai c: ', c)
+
+    d = np.concatenate((b, c))
+    print('Mảng d: ', d)
+
+    k = np.where(d > 1)
+    print('Vị trí các phần tử lớn hơn 1 trong c: ', k[0])
+
+    d = np.sort(d, kind=’heapsort’) 
+    print('c đã sắp tăng dầ: ', d)
+
+k = int(input('Nhập vào giá trị cần chèn:'))
+vt = np.searchsorted(d, k)
+print('Vị trí thích hợp để chèn: ', vt)
+
+d = np.insert(d, vt, k)
+print('Mảng d sau khi chèn: ', d)
+#
+Khởi tạo một mảng a (1-D) với n phần tử ngẫu nhiên nhận các giá trị trong [0, 1]. In kết quả ra màn hình. Cho biết số ndim, shape, len, itemsize, dtype của a. 
+Khởi tạo một mảng b với 100 phần tử trong đoạn [1, n]. In b và các thông số của b ra màn hình.
+Khởi tạo 1 mảng c với 100 số chẵn đầu tiên, in ra màn hình.
+Khởi tạo mảng d với 100 phần tử 1, in ra màn hình.
+Khởi tạo mảng e với 100 phần tử 0, in ra màn hình.
+Khởi tạo mảng h với 100 phần tử theo phân bố Gauss, in ra màn hình.
+Khởi tạo một ma trận k gồm n×m số 1, in k ra màn hình.
+Khởi tạo ma trận p là ma trận đơn vị với kích thước (n × n), in ra màn hình.
+Khởi tạo ma trận đường chéo `g a, in ra màn hình.
+import numpy as np
+n = int(input("n="))
+a = np.random.rand(n) 
+print("a = ", a)
+print('Số chiều của a: ', a.ndim)
+print('Kích thước mỗi chiều: ', a.shape)
+print('Độ dài của a: ', len(a))
+print('Kích thước 1 phần tử: ', a.itemsize)
+print('Kiểu của các phần tử: ', a.dtype)
+             
+             
+
+#2
+b = np.linspace(1, n, 100)
+print('Mảng b:\n', b)
+print('Số chiều của b: ', b.ndim)
+print('Kích thước mỗi chiều: ', b.shape)
+print('Độ dài của b: ', len(b))
+print('Kích thước 1 phần tử: ', b.itemsize)
+print('Kiểu của các phần tử: ', b.dtype)
+#3
+c = np.arange(2, 201, 2)
+print('Mảng c:\n', c)
+#4
+d = np.ones(100)
+print('Mảng d:\n', d)
+#5
+e = np.zeros(100)
+print('Mảng e:\n', d)
+#6
+h = np.random.randn(100)
+print('Mảng h:\n', h)
+#7
+m = int(input('m='))
+k = np.ones((n, m))
+print('Mảng k:\n', k)
+#8
+p = np.eye(n)
+print('Mảng p:\n', p)
+#9
+q = np.diag(a)
+print('Mảng q:\n', q)
+
+#
+Bài 5.2.   Simple operations (40 phút)
+Nhập vào hai véctơ a và b cùng kích thước n, tọa độ thực. Hãy:
+Tính véc tơ c với các phần tử là tổng của các phần tử tương ứng của a và b.
+Tính véc tơ d, e, f với các phần tử lần lượt là: hiệu, tích, thương giữa các phần tử tương ứng của a và b. In các kết quả ra màn hình.
+Cho biết tổng, giá trị lớn nhất, giá trị nhỏ nhất của các phần tử trong c.
+Lấy ra các phần tử có chỉ số chẵn trong c, tính tổng của chúng và in các kết quả ra màn hình (số 0 tạm coi là chẵn).
+Chuyển mảng c thành mảng hai chiều (nếu được), in kết quả ra màn hình.
+
+import numpy as np
+
+#1 NHẬP MẢNG
+def vecinput(n, name):
+    print("Nhập mảng ", name)
+    a = np.random.rand(n)
+    for i in range(n):
+        a[i] = float(input(name + "[{}] = ".format(i)))
+    return a
+
+n = int(input("n="))
+a = vecinput(n, 'a')
+b = vecinput(n, 'b')
+#2, 3 TÍNH TOÁN SỐ HỌC ĐƠN GIẢN
+print('Mảng a: ', a)
+print('Mảng b: ', b)
+c = a + b
+d = a - b
+e = a * b
+f = a / b
+print('Mảng c: ', c)
+print('Mảng d: ', d)
+print('Mảng e: ', e)
+print('Mảng f: ', f)
+
+#4 SỬ DỤNG CÁC HÀM/PHƯƠNG THỨC TRÊN MẢNG
+print('Tổng của c: ', c.sum())
+print('Max của c : ', c.max())
+print('Min của c : ', c.min())
+
+
+#5 SLICING TRÊN MẢNG
+k = c[::2]print('Các phần tử có chỉ số chẵn trong c: ', k)
+
+print('Tổng = ', k.sum())
+
+#6 RESHAPE TỪ 1D THÀNH 2D
+try:
+    t = int(input('Nhập số dòng của ma trận: '))
+    if n % t != 0: raise ValueError #nếu không thể reshape
+    k = c.reshape(t, n//t)
+    print('Ma trận thu được: \n', k)
+except:
+    print(ValueError, ': Không thể reshape !')
+
+
+
+
