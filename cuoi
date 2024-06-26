@@ -206,4 +206,157 @@ except:
 
 
 
+import numpy as np
+#1
+n = int(input("n=")) 
+#ngẫu nhiên n phần tử trong giá trị [0,1]
+a = np.random.rand(n) 
+print("a = ", a)
+print('Số chiều của a: ', a.ndim)
+print('Kích thước mỗi chiều: ', a.shape)
+print('Độ dài của a: ', len(a))
+print('Kích thước 1 phần tử: ', a.itemsize)
+print('Kiểu của các phần tử: ', a.dtype)
+            
+             
+
+#2
+#khởi tạo mảng b với 100 phần tử trong đoạn [1,n]
+b = np.linspace(1, n, 100)
+print('Mảng b:\n', b)
+print('Số chiều của b: ', b.ndim)
+print('Kích thước mỗi chiều: ', b.shape)
+print('Độ dài của b: ', len(b))
+print('Kích thước 1 phần tử: ', b.itemsize)
+print('Kiểu của các phần tử: ', b.dtype)
+#3
+#khởi tạo mảng c với 100 số chẵn đầu tiên
+c = np.arange(2, 201, 2)
+print('Mảng c:\n', c)
+#4
+#100 phần tử 1
+d = np.ones(100)
+print('Mảng d:\n', d)
+#5
+e = np.zeros(100)
+print('Mảng e:\n', d)
+#6
+#phân bố theo Gauss
+h = np.random.randn(100)
+print('Mảng h:\n', h)
+#7
+#khởi tạo một ma trận k gồm n*m số 1
+m = int(input('m='))
+k = np.ones((n, m))
+print('Mảng k:\n', k)
+#8
+#ma trận kích thước n*n
+p = np.eye(n)
+print('Mảng p:\n', p)
+#9
+#ma trận đường chéo với mảng a
+q = np.diag(a)
+print('Mảng q:\n', q)
+
+import numpy as np
+
+#1 NHẬP MẢNG
+def vecinput(n, name):
+    print("Nhập mảng ", name)
+    a = np.random.rand(n)
+    for i in range(n):
+        a[i] = float(input(name + "[{}] = ".format(i)))
+    return a
+
+n = int(input("n="))
+a = vecinput(n, 'a')
+b = vecinput(n, 'b')
+
+#2, 3 TÍNH TOÁN SỐ HỌC ĐƠN GIẢN
+print('Mảng a: ', a)
+print('Mảng b: ', b)
+c = a + b
+d = a - b
+e = a * b
+f = a / b
+print('Mảng c: ', c)
+print('Mảng d: ', d)
+print('Mảng e: ', e)
+print('Mảng f: ', f)
+
+#4 SỬ DỤNG CÁC HÀM/PHƯƠNG THỨC TRÊN MẢNG
+print('Tổng của c: ', c.sum())
+print('Max của c : ', c.max())
+print('Min của c : ', c.min())
+#5 SLICING TRÊN MẢNG
+k = c[::2]
+print('Các phần tử có chỉ số chẵn trong c: ', k)
+print('Tổng = ', k.sum())
+
+#6 RESHAPE TỪ 1D THÀNH 2D
+try:
+    t = int(input('Nhập số dòng của ma trận: '))
+    if n % t != 0: raise ValueError #nếu không thể reshape
+    k = c.reshape(t, n//t)
+    print('Ma trận thu được: \n', k)
+except:
+    print(ValueError, ': Không thể reshape !')
+
+
+
+
+import numpy as np
+#1 HÀM NHẬP MẢNG
+def vecinput(n, name):
+ print("Nhập mảng ", name)
+ a = np.random.rand(n)
+ for i in range(n):
+   a[i] = float(input(name + "[{}] = ".format(i)))
+ return a
+#2 HÀM RESHAPE TỪ 1D SANG 2D
+def to2D(a, n):
+ try:
+   t = int(input('Nhập số dòng của ma trận: '))
+   if n % t != 0: raise ValueError
+   k = a.reshape(t, n//t)
+   return k
+ except:
+   print(ValueError, ': Không thể reshape !')
+ return
+
+n = int(input("n="))
+a = vecinput(n, 'a')
+a = to2D(a, n)
+print('Mảng a:\n', a)
+
+if len(a[0]) > 1:
+ b = a[:, 0]
+ c = a[:, 1]
+ b = np.reshape(b, -1)
+ c = np.reshape(c, -1)
+
+ print('Cột thứ nhất b: ', b)
+ print('Cột thứ hai c: ', c)
+#nối b với c
+ d = np.concatenate((b, c))
+ print('Mảng d: ', d)
+
+ k = np.where(d > 1)
+ print('Vị trí các phần tử lớn hơn 1 trong c: ', k[0])
+
+ d = np.sort(d, kind='heapsort')
+ print('d đã sắp tăng dần: ', d)
+
+k = int(input('Nhập vào giá trị cần chèn:'))
+#thêm mà không ảnh hưởng tới tính được sắp
+vt = np.searchsorted(d, k)
+print('Vị trí thích hợp để chèn: ', vt)
+
+d = np.insert(d, vt, k)
+print('Mảng d sau khi chèn: ', d)
+
+
+
+
+
 
