@@ -1,0 +1,210 @@
+#include<bits/stdc++.h>
+using namespace std;
+/*De quy*/
+//fibonachi de quy co nho
+//long long F[105]={0,1};
+//int fibo(int n){
+//	if(n<2) return F[n]=n;
+//	if(F[n]!=0) return F[n];
+//	return F[n]=fibo(n-1)+fibo(n-2);
+//}
+
+//tinh tong cac chu so cua so nguyen duong n
+//int tong(int n){
+//	if(n==0) return 0;
+//	else return n%10+tong(n/10);
+//}
+
+//tong cac so le trong 1 day a gom n so nguyen
+//int tong(int n, int a[]){
+//	if(n==1 && a[n-1]%2==1)  return a[n-1];
+//	if(n==1 && a[n-1]%2==0) return 0;
+//	if(n>1 && a[n-1]%2==1) return a[n-1]+tong(n-1, a);
+//	if(n>1 && a[n-1]%2==0) return tong(n-1, a);
+//}
+
+//UCLN
+//int UCLN(int a, int b){
+//	if(b==0) return a;
+//	else return UCLN(b,a%b);
+//}
+//UCLN khu de quy
+//int UCLN(int a,int b){
+//	int r=a%b;
+//	while(r!=0){
+//		a=b;
+//		b=r;
+//		r=a%b;
+//	}
+//	return b;
+//}
+
+//fibo de quy-khu de quy
+//int fibo(int n){
+//	if(n<2) return 1;
+//	else return fibo(n-1)+fibo(n-2);
+//}
+//int kfibo(int n){
+//	long long t1 =1, t2=1, tn;
+//	for(int i=3; i<=n; i++){
+//		tn=t1+t2;
+//		t1=t2;
+//		t2=tn;
+//	}
+//	return tn;
+//}
+
+//Quick sort 
+//void quickSort(int a[], int l, int r){
+//	int p = a[(l+r)/2];
+//	int i = l, j = r;
+//	while (i < j){
+//		while (a[i] < p){
+//			i++;
+//		}
+//		while (a[j] > p){
+//			j--;
+//		}
+//		if (i <= j){
+//			int temp = a[i];
+//			a[i] = a[j];
+//			a[j] = temp;
+//			i++;
+//			j--;
+//		}
+//	}
+//	if (i < r){
+//		quickSort(a, i, r);
+//	}
+//	if (l < j){
+//		quickSort(a, l, j);
+//	}
+//}
+//void quickSortUnRecursive(int *a, int l, int r)
+//{
+//    srand(time(NULL));
+//    stack<int> Sl;     
+//    stack<int> Sr;      
+//    Sl.push(l);      
+//    Sr.push(r);      
+// 
+//    while(!Sl.empty()) 
+//    {
+// 
+//        int l = Sl.top(); Sl.pop();  
+//        int r = Sr.top(); Sr.pop();  
+//        int key = a[l + rand() % (r-l+1)];
+//        int i = l, j = r;
+//        while (i <= j)   
+//        {
+//            while (a[i] < key) i++;
+//            while (a[j] > key) j--;
+// 
+//            if(i <= j)
+//            {
+//                if (i < j)
+//                    swap(a[i], a[j]);
+//                i++;
+//                j--;
+//            }
+//        }
+//        if (l < j) { Sl.push(l); Sr.push(j); }
+//        if (i < r) { Sl.push(i); Sr.push(r); }
+//    }
+//}
+
+/*quay lui*/
+//nhiphanquaylui
+//void xuat(int x[], int n){
+//	for(int i=0; i<n;i++){
+//		cout<<x[i];
+//	}
+//	cout<<endl;
+//}
+//void nhiphan(int x[], int n, int i){
+//	for(int j=0;j<=1;j++){
+//		x[i]=j;
+//		if(i==n){
+//			xuat(x, n);
+//		}
+//		else nhiphan(x,n,i+1);
+//	}
+//}
+//Hoan vi quay lui
+//char G[4] = {'A', 'B', 'C', 'D'};
+//string N[4] = {"Tung", "Cuc", "Truc", "Mai"};
+//int a[4];
+//bool used[4] = {0}; 
+//int cnt = 0;
+//
+//void print() {
+//	for (int i = 0; i < 4; ++i) {
+//		cout << G[i] << ": " << N[a[i]] << "\t";
+//	}
+//	cout << "\n";
+//}
+//
+//void Backtrack(int i){
+//	for (int j = 0; j <= 3; ++j) {
+//		if (!used[j]) {
+//			used[j] = 1;
+//			a[i] = j;
+//			if (i == 3) {
+//				print();
+//				cnt += 1;
+//			}
+//			else {
+//				Backtrack(i + 1);
+//			}
+//			used[j] = 0;
+//		}
+//	}	
+//}
+//
+//int main() {
+//	cout << "Cac cach xep 4 nguoi vao 4 ghe: \n";
+//	Backtrack(0);
+//	cout << "So cach xep la: " << cnt << "\n";
+//	return 0;
+//}
+//to hop
+//void inkg(){
+//	for(int i=1; i<=k;i++){
+//		cout<<x[i];
+//	}
+//	cout<<endl;
+//}
+//void tohop(int i){
+//	for(int j=x[i-1]+1; j<=n-k+i; j++){
+//		x[i]=j;
+//		if(i==k){
+//			inkg();
+//		}
+//		else tohop(i+1);
+//	}
+//}
+//to hop
+//char S[]={'A','B','C','D','E','F','G'};
+//int x[100];
+//int k=6;
+//int n=7;
+//void inkg(){
+//	for(int i=1; i<=k;i++){
+//		cout<<S[x[i]-1];
+//	}
+//	cout<<endl;
+//}
+//void tohop(int i){
+//	for(int j=x[i-1]+1; j<=n-k+i; j++){
+//		x[i]=j;
+//		if(i==k){
+//			inkg();
+//		}
+//		else tohop(i+1);
+//	}
+//}
+int main(){
+	int x[100]={};
+	int n=18;
+	nhiphan(x,n,1);
+}
